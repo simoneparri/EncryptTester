@@ -27,11 +27,11 @@ export class CryptoService {
       JSON.stringify(input), _key, {
         keySize: 16,
         iv: _iv,
-        mode: CryptoJS.mode.ECB,
+        mode: CryptoJS.mode.CBC,
         padding: CryptoJS.pad.Pkcs7
       });
     this.encryptedRequestAES.next(encryptedAES.toString());
-    let encrypted=Base64.encode(encryptedAES.toString());
+    let encrypted=btoa(encryptedAES.toString());
     this.encryptedRequestBase64.next(encrypted.toString());
     return encrypted.toString();
   }
@@ -40,23 +40,25 @@ export class CryptoService {
     let _key = CryptoJS.enc.Utf8.parse(this.KEY);
     let _iv = CryptoJS.enc.Utf8.parse(this.IV);
     this.encryptedResponseBase64.next(input);
-    input=Base64.decode(input);
+    input=atob(input);
     this.encryptedResponseAES.next(input);
     let decrypted= CryptoJS.AES.decrypt(
       input, _key, {
         keySize: 16,
         iv: _iv,
-        mode: CryptoJS.mode.ECB,
+        mode: CryptoJS.mode.CBC,
         padding: CryptoJS.pad.Pkcs7
       }).toString();
       return JSON.parse(decrypted);
   }
 
   public set iv(input:string){
-    this.IV=Base64.decode(input);
+    // this.IV=Base64.decode(input);
+    this.IV=atob(input)
   }
   public set key(input:string){
-    this.KEY=Base64.decode(input);
+    // this.KEY=Base64.decode(input);
+    this.KEY=atob(input)
   }
 
   public set enableCrypto(input:boolean){

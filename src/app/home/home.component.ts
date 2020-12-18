@@ -66,6 +66,9 @@ export class HomeComponent implements OnInit {
     this.response='';
   }
   public doRequest2() {
+    this.cryptoService.enableCrypto=this.enableCrypto;
+    this.cryptoService.iv=this.iv;
+    this.cryptoService.key=this.key;
     this.cryptoService.decrypt("eOfJUPevA7pbZbLX4H0T9uoSbRNy0QaX391cMsjd0Pk=")
   }
   public doRequest() {
