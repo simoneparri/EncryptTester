@@ -87,17 +87,6 @@
       </button>
     </div>
     <div class="cell">
-      <button
-        mat-raised-button
-        type="button"
-        color="primary"
-        style="margin-top: 3.5rem; max-width: 10rem"
-        (click)="doRequest2()"
-      >
-        Do Request2
-      </button>
-    </div>
-    <div class="cell">
       <mat-spinner *ngIf="showSpinner" diameter="30" style="margin-left: 50px;"></mat-spinner>
     </div>
   </div>
@@ -113,17 +102,9 @@
     <mat-label style="margin-top: 0.2rem;">Encrypted Request AES {{(isPostOrPut?'Body':'Url')}}</mat-label>
     <mat-divider></mat-divider>
     <mat-list-item>{{(isPostOrPut?'':'?q=')+ encryptedRequestAES }}</mat-list-item>
-    <mat-label>Encrypted Request Base64 {{(isPostOrPut?'Body':'Url')}}</mat-label>
-    <mat-divider></mat-divider>
-    <mat-list-item>{{(isPostOrPut?'':'?q=')+ encryptedRequestBase64 }}</mat-list-item>
 
     <mat-divider class="blue" style="margin-bottom:2rem;"></mat-divider>
     <mat-label><h4>Response</h4></mat-label>
-
-    <mat-label style="margin-top: 0.2rem;">Encrypted Response Base64</mat-label>
-    <mat-divider></mat-divider>
-    <mat-list-item>{{ encryptedResponseBase64 }}</mat-list-item>
-    <mat-spinner *ngIf="showSpinner" diameter="30" style="margin-left: 50px;"></mat-spinner>
 
     <mat-label style="margin-top: 0.2rem;">Encrypted Response AES</mat-label>
     <mat-divider></mat-divider>
@@ -135,4 +116,52 @@
     <mat-list-item>{{ response }}</mat-list-item>
     <mat-spinner *ngIf="showSpinner" diameter="30" style="margin-left: 50px;"></mat-spinner>
   </mat-list>
+
+  <mat-divider class="blue"></mat-divider>
+  <mat-divider class="blue"></mat-divider>
+  <mat-label><h3>CRYPT/DECRYPT</h3></mat-label>
+
+
+
+  <mat-form-field>
+    <mat-label>Input</mat-label>
+    <input
+    matInput
+    placeholder="Ex. ?nome=mario&cognome=rossi"
+    [value]="input"
+    (change)="input = $event.target.value"
+    />
+  </mat-form-field>
+  <div class="row">
+    <div class="cell">
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        style="margin-top: 3.5rem; max-width: 10rem"
+        (click)="encrypt()"
+      >
+        Encrypt
+      </button>
+    </div>
+    <div class="cell">
+      <button
+        mat-raised-button
+        type="button"
+        color="primary"
+        style="margin-top: 3.5rem; max-width: 10rem"
+        (click)="decrypt()"
+      >
+        Decrypt
+      </button>
+    </div>
+  </div>
+  <mat-list>
+
+    <mat-label>Output</mat-label>
+    <mat-divider></mat-divider>
+    <mat-list-item>{{output}}</mat-list-item>
+
+  </mat-list>
+
 </form>

@@ -13,8 +13,6 @@ export class CryptoService {
   private IV= '';
   private KEY= '';
 
-  encryptedRequestBase64 = new Subject<string>();
-  encryptedResponseBase64 = new Subject<string>();
   encryptedRequestAES = new Subject<string>();
   encryptedResponseAES = new Subject<string>();
 
@@ -28,26 +26,22 @@ export class CryptoService {
         keySize: 16,
         iv: _iv,
         mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7
+        padding: CryptoJS.pad.NoPadding
       });
     this.encryptedRequestAES.next(encryptedAES.toString());
-    let encrypted=btoa(encryptedAES.toString());
-    this.encryptedRequestBase64.next(encrypted.toString());
-    return encrypted.toString();
+    return encryptedAES.toString();
   }
 
   public decrypt(input:string):any {
     let _key = CryptoJS.enc.Utf8.parse(this.KEY);
     let _iv = CryptoJS.enc.Utf8.parse(this.IV);
-    this.encryptedResponseBase64.next(input);
-    input=atob(input);
     this.encryptedResponseAES.next(input);
     let decrypted= CryptoJS.AES.decrypt(
       input, _key, {
         keySize: 16,
         iv: _iv,
         mode: CryptoJS.mode.CBC,
-        padding: CryptoJS.pad.Pkcs7
+        padding: CryptoJS.pad.NoPadding
       }).toString();
       return JSON.parse(decrypted);
   }

@@ -32,8 +32,11 @@ export class HomeComponent implements OnInit {
 
   public encryptedRequestAES:string = '';
   public encryptedResponseAES:string = '';
-  public encryptedRequestBase64:string = '';
-  public encryptedResponseBase64:string = '';
+
+  public input:string = '';
+  public output:string = '';
+
+
 
   public showSpinner=false;
   public get isPostOrPut(){
@@ -54,23 +57,14 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.cryptoService.encryptedRequestAES.subscribe(succ=>{this.encryptedRequestAES=succ});
     this.cryptoService.encryptedResponseAES.subscribe(succ=>{this.encryptedResponseAES=succ});
-    this.cryptoService.encryptedRequestBase64.subscribe(succ=>{this.encryptedRequestBase64=succ});
-    this.cryptoService.encryptedResponseBase64.subscribe(succ=>{this.encryptedResponseBase64=succ});
   }
 
   public reset(){
     this.encryptedRequestAES='';
-    this.encryptedRequestBase64='';
     this.encryptedResponseAES='';
-    this.encryptedResponseBase64='';
     this.response='';
   }
-  public doRequest2() {
-    this.cryptoService.enableCrypto=this.enableCrypto;
-    this.cryptoService.iv=this.iv;
-    this.cryptoService.key=this.key;
-    this.cryptoService.decrypt("eOfJUPevA7pbZbLX4H0T9uoSbRNy0QaX391cMsjd0Pk=")
-  }
+
   public doRequest() {
     console.clear();
     this.reset();
@@ -86,7 +80,6 @@ export class HomeComponent implements OnInit {
         }, err=>{
           this.showSpinner=false;
           this.encryptedResponseAES='error';
-          this.encryptedResponseBase64='error';
           this.response=JSON.stringify(err);
         });
         break;
@@ -96,7 +89,6 @@ export class HomeComponent implements OnInit {
         }, err=>{
           this.showSpinner=false;
           this.encryptedResponseAES='error';
-          this.encryptedResponseBase64='error';
           this.response=JSON.stringify(err);
         });
         break;
@@ -106,7 +98,6 @@ export class HomeComponent implements OnInit {
         }, err=>{
           this.showSpinner=false;
           this.encryptedResponseAES='error';
-          this.encryptedResponseBase64='error';
           this.response=JSON.stringify(err);
         });
         break;
@@ -116,10 +107,22 @@ export class HomeComponent implements OnInit {
         }, err=>{
           this.showSpinner=false;
           this.encryptedResponseAES='error';
-          this.encryptedResponseBase64='error';
           this.response=JSON.stringify(err);
         });
         break;
     }
+  }
+
+  public encrypt() {
+    this.cryptoService.enableCrypto=this.enableCrypto;
+    this.cryptoService.iv=this.iv;
+    this.cryptoService.key=this.key;
+    this.output=this.cryptoService.encrypt(this.input)
+  }
+  public decrypt() {
+    this.cryptoService.enableCrypto=this.enableCrypto;
+    this.cryptoService.iv=this.iv;
+    this.cryptoService.key=this.key;
+    this.output=this.cryptoService.decrypt(this.input)
   }
 }
