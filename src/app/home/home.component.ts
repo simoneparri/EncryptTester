@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
 
   public enableCrypto:boolean=true;
 
-  public iv: string = '';
-  public key: string = '';
+  public iv: string = 'GtjZ4+YnwCgs3diN6+kcFw==';
+  public key: string = 'E3IJcCIheoIGfKLOFKL30nlgCbZVJEv0FMNF2XHMp5A=';
 
   public requestTypes = ['GET', 'POST', 'PUT', 'DELETE'];
   public _requestType: string = this.requestTypes[0];
@@ -64,6 +64,9 @@ export class HomeComponent implements OnInit {
     this.encryptedResponseAES='';
     this.encryptedResponseBase64='';
     this.response='';
+  }
+  public doRequest2() {
+    this.cryptoService.decrypt("eOfJUPevA7pbZbLX4H0T9uoSbRNy0QaX391cMsjd0Pk=")
   }
   public doRequest() {
     console.clear();

@@ -12,12 +12,12 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>AES IV</mat-label>
+    <mat-label>Base64 - AES IV</mat-label>
     <input matInput placeholder="Ex. fa2RQ3rqr=" [(value)]="iv" />
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>AES KEY</mat-label>
+    <mat-label>Base64 - AES KEY</mat-label>
     <input matInput placeholder="Ex. asd23rFSw=" [(value)]="key" />
   </mat-form-field>
 
@@ -39,6 +39,7 @@
       matInput
       placeholder="Ex. http://localhost:8080/testfilter/test"
       [(value)]="url"
+      (change)="url = $event.target.value"
     />
   </mat-form-field>
 
@@ -80,7 +81,7 @@
         type="button"
         color="primary"
         style="margin-top: 3.5rem; max-width: 10rem"
-        (click)="doRequest()"
+        (click)="doRequest2()"
       >
         Do Request
       </button>
