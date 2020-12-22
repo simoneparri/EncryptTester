@@ -8,14 +8,14 @@ Front End->Back End: Http Request
 Note right of Front End: Http Interceptor - Encrypt/Decrypt AES
 Back End->Front End: Http Response
 ```
-##How start PoC
+###How start PoC
 ```bash
 npm install  
 npm run start
 ```
 You can use this project for your playground or for debugging the backend development
 
-##How to use in your project
+###How to use in your project
 For integrate this interceptor in your Angular spa go through the following steps.
 
 #### Step 1
@@ -28,10 +28,10 @@ npm install crypto-js --save
 Copy the folder crypto to your project
 ```bash
 └───crypto
- |───crypto.interceptor.spec.ts
- |───crypto.interceptor.ts
- |───crypto.service.spec.ts
-└───crypto.service.ts
+     |───crypto.interceptor.spec.ts
+     |───crypto.interceptor.ts
+     |───crypto.service.spec.ts
+     └───crypto.service.ts
 ```
 
 #### Step 3 
