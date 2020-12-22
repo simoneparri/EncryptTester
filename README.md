@@ -28,10 +28,10 @@ npm install crypto-js --save
 Copy the folder crypto to your project
 ```bash
 └───crypto
-			 |───crypto.interceptor.spec.ts
-			 |───crypto.interceptor.ts
-			 |───crypto.service.spec.ts
-			└───crypto.service.ts
+ |───crypto.interceptor.spec.ts
+ |───crypto.interceptor.ts
+ |───crypto.service.spec.ts
+└───crypto.service.ts
 ```
 
 #### Step 3 
