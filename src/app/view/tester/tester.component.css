@@ -1,0 +1,7 @@
+.grid{
+  display: grid;
+}
+
+.mat-divider.blue {
+  border-top-color: #3f51b5;
+}

@@ -1,25 +1,28 @@
-<form class="example-form">
-  <mat-form-field appearance="fill" style="margin-bottom: 2rem">
-    <mat-label><b>Enable Crypto</b></mat-label>
-    <mat-select [(value)]="enableCrypto">
-      <mat-option
-        *ngFor="let i of [true,false]"
-        [value]="i"
-      >
-        {{ i }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+<form class="grid">
+  <mat-slide-toggle
+          style="margin-bottom: 2rem;"
+          [color]="'primary'"
+          [(checked)]="enableCrypto"
+          (change)="enableCrypto = $event.checked"
+          >
+          Enable Crypto
+      </mat-slide-toggle>
+
+<mat-divider class="blue" style="margin-bottom: 1rem;"></mat-divider>
+
 
   <mat-form-field>
     <mat-label>Base64 - AES IV</mat-label>
-    <input matInput placeholder="Ex. fa2RQ3rqr=" [(value)]="iv" />
+    <input matInput placeholder="Ex. GtjZ4+YnwCgs3diN6+kcFw==" [(value)]="iv" (change)="iv = $event.target.value" />
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Base64 - AES KEY</mat-label>
-    <input matInput placeholder="Ex. asd23rFSw=" [(value)]="key" />
+    <input matInput placeholder="Ex. E3IJcCIheoIGfKLOFKL30nlgCbZVJEv0FMNF2XHMp5A=" [(value)]="key" (change)="key = $event.target.value"/>
   </mat-form-field>
+
+<mat-divider class="blue" style="margin-bottom: 2rem;"></mat-divider>
+
 
   <mat-form-field appearance="fill" style="margin-top: 2rem">
     <mat-label>Request Type</mat-label>
@@ -38,7 +41,7 @@
     <input
       matInput
       placeholder="Ex. http://localhost:8080/testfilter/test"
-      [(value)]="url"
+      [value]="url"
       (change)="url = $event.target.value"
     />
   </mat-form-field>
@@ -101,7 +104,7 @@
 
     <mat-label style="margin-top: 0.2rem;">Encrypted Request AES {{(isPostOrPut?'Body':'Url')}}</mat-label>
     <mat-divider></mat-divider>
-    <mat-list-item>{{(isPostOrPut?'':'?q=')+ encryptedRequestAES }}</mat-list-item>
+    <mat-list-item>{{(isPostOrPut && enableCrypto?'':'?q=')+ encryptedRequestAES }}</mat-list-item>
 
     <mat-divider class="blue" style="margin-bottom:2rem;"></mat-divider>
     <mat-label><h4>Response</h4></mat-label>
@@ -115,53 +118,6 @@
     <mat-divider></mat-divider>
     <mat-list-item>{{ response }}</mat-list-item>
     <mat-spinner *ngIf="showSpinner" diameter="30" style="margin-left: 50px;"></mat-spinner>
-  </mat-list>
-
-  <mat-divider class="blue"></mat-divider>
-  <mat-divider class="blue"></mat-divider>
-  <mat-label><h3>CRYPT/DECRYPT</h3></mat-label>
-
-
-
-  <mat-form-field>
-    <mat-label>Input</mat-label>
-    <input
-    matInput
-    placeholder="Ex. ?nome=mario&cognome=rossi"
-    [value]="input"
-    (change)="input = $event.target.value"
-    />
-  </mat-form-field>
-  <div class="row">
-    <div class="cell">
-      <button
-        mat-raised-button
-        type="button"
-        color="primary"
-        style="margin-top: 3.5rem; max-width: 10rem"
-        (click)="encrypt()"
-      >
-        Encrypt
-      </button>
-    </div>
-    <div class="cell">
-      <button
-        mat-raised-button
-        type="button"
-        color="primary"
-        style="margin-top: 3.5rem; max-width: 10rem"
-        (click)="decrypt()"
-      >
-        Decrypt
-      </button>
-    </div>
-  </div>
-  <mat-list>
-
-    <mat-label>Output</mat-label>
-    <mat-divider></mat-divider>
-    <mat-list-item>{{output}}</mat-list-item>
-
   </mat-list>
 
 </form>

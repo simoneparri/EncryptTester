@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './view/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -13,39 +13,51 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
-import { CryptoService } from './service/crypto.service';
-import { CryptInterceptor } from './service/crypt.interceptor';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
 
+import { CryptoService } from './service/crypto/crypto.service';
+import { CryptoInterceptor } from './service/crypto/crypto.interceptor';
+import { TesterComponent } from './view/tester/tester.component';
 
-
-const MATERIAL=[
+const MATERIAL = [
   MatInputModule,
   MatSelectModule,
   MatButtonModule,
   MatListModule,
   MatProgressSpinnerModule,
-  MatButtonToggleModule
-]
+  MatButtonToggleModule,
+  MatSlideToggleModule,
+  MatToolbarModule,
+  MatSidenavModule,
+  MatListModule,
+  MatButtonModule,
+  MatIconModule,
+];
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent
-  ],
+  declarations: [AppComponent, HomeComponent, TesterComponent],
   imports: [
     MATERIAL,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [CryptoService,HttpClientService,
+  providers: [
+    HttpClientService,
+
+    // START copy for insert  CryptoInterceptor
+    CryptoService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: CryptInterceptor,
-      multi: true
+      useClass: CryptoInterceptor,
+      multi: true,
     }
+    // END copy for insert  CryptoInterceptor
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

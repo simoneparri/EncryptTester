@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CryptoService } from './../service/crypto.service';
-import { HttpClientService } from './../service/http-client.service';
+import { CryptoService } from '../../service/crypto/crypto.service';
+import { HttpClientService } from '../../service/http-client.service';
 
 @Component({
   selector: 'app-home',
@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
 
   public enableCrypto:boolean=true;
 
-  public iv: string = 'GtjZ4+YnwCgs3diN6+kcFw==';
-  public key: string = 'E3IJcCIheoIGfKLOFKL30nlgCbZVJEv0FMNF2XHMp5A=';
+  public iv: string = '';
+  public key: string = '';
 
   public requestTypes = ['GET', 'POST', 'PUT', 'DELETE'];
   public _requestType: string = this.requestTypes[0];
@@ -32,10 +32,6 @@ export class HomeComponent implements OnInit {
 
   public encryptedRequestAES:string = '';
   public encryptedResponseAES:string = '';
-
-  public input:string = '';
-  public output:string = '';
-
 
 
   public showSpinner=false;
@@ -113,16 +109,4 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public encrypt() {
-    this.cryptoService.enableCrypto=this.enableCrypto;
-    this.cryptoService.iv=this.iv;
-    this.cryptoService.key=this.key;
-    this.output=this.cryptoService.encrypt(this.input)
-  }
-  public decrypt() {
-    this.cryptoService.enableCrypto=this.enableCrypto;
-    this.cryptoService.iv=this.iv;
-    this.cryptoService.key=this.key;
-    this.output=this.cryptoService.decrypt(this.input)
-  }
 }

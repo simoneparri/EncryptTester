@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CryptInterceptor } from './crypt.interceptor';
+import { CryptoInterceptor } from './crypto.interceptor';
 
 describe('EncryptInterceptorInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      CryptInterceptor
+      CryptoInterceptor
       ]
   }));
 
   it('should be created', () => {
-    const interceptor: CryptInterceptor = TestBed.inject(CryptInterceptor);
+    const interceptor: CryptoInterceptor = TestBed.inject(CryptoInterceptor);
     expect(interceptor).toBeTruthy();
   });
 });

@@ -1,27 +1,75 @@
-# EncryptTester
+# POC AES ANGULAR  INTERCEPTOR
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
+This Spa has an interceptor that encrypt every request before sending to the backend server, and decryp every response.
+The CryptoService use AES algorytm and use an IV and KEY string encoded in Base64
+                    
+```seq
+Front End->Back End: Http Request
+Note right of Front End: Http Interceptor - Encrypt/Decrypt AES
+Back End->Front End: Http Response
+```
+##How start PoC
+```bash
+npm install  
+npm run start
+```
+You can use this project for your playground or for debugging the backend development
 
-## Development server
+##How to use in your project
+For integrate this interceptor in your Angular spa go through the following steps.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+#### Step 1
+Run the following commands for install Crypto-JS library in to your project
+```bash
+npm install @types/crypto-js --save  
+npm install crypto-js --save  
+```
+#### Step 2
+Copy the folder crypto to your project
+```bash
+└───crypto
+			 |───crypto.interceptor.spec.ts
+			 |───crypto.interceptor.ts
+			 |───crypto.service.spec.ts
+			└───crypto.service.ts
+```
 
-## Code scaffolding
+#### Step 3 
+Edit your AppModule or equivalent and add  CryptoService and CryptoInterceptor on the prividers section, like this:
+```typescript
+...
+@NgModule({
+  declarations: [AppComponent, HomeComponent, TesterComponent],
+  imports: [...],
+  providers: [
+    ...
+    // START CryptoInterceptor
+    CryptoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CryptoInterceptor,
+      multi: true,
+    }
+    // END CryptoInterceptor
+  ],
+  bootstrap: [...],
+})
+export class AppModule {}
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+#### Step 4
+Before you use the interceptor you **must** set these following parameters of CryptoService
 
-## Build
+- this.cryptoService.enableCrypto=*true*;
+- this.cryptoService.iv=*BASE64_KEY*;
+- this.cryptoService.key=*BASE64_KEY*;
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+these properties must be taken from an env. file or from an other propreties file of your project
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+------------
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+#### Documentation
+- [Crypto-JS](https://cryptojs.gitbook.io/docs/)
+- [AES algorytm](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)

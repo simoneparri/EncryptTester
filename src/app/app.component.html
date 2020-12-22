@@ -1,1 +1,30 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button>
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+    </button>
+    <h1>AES ANGULAR INTERCEPTOR</h1>
+    <span class="menu-spacer"></span>
+</mat-toolbar-row>
+
+<mat-toolbar-row>
+    <span style="font-size: 12px;">PoC of Angular AES Crypto Interceptor (crypt and decrypt every request and response toand from backend)</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <mat-nav-list>
+
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/home'"><mat-icon>compare_arrows</mat-icon> CryptoInterceptor</a>
+      <a mat-list-item (click)="sidenav.toggle()" [routerLink]="'/tester'"><mat-icon>bug_report</mat-icon> Encrypt/Decrypt</a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div style="margin: 2rem;">
+
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
