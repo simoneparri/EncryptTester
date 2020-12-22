@@ -1,13 +1,9 @@
 # POC AES ANGULAR  INTERCEPTOR
-
 This Spa has an interceptor that encrypt every request before sending to the backend server, and decryp every response.
 The CryptoService use AES algorytm and use an IV and KEY string encoded in Base64
                     
-```seq
-Front End->Back End: Http Request
-Note right of Front End: Http Interceptor - Encrypt/Decrypt AES
-Back End->Front End: Http Response
-```
+[![Schems](https://github.com/simoneparri/POC-AES-ANGULAR-INTERCEPTOR/blob/main/assets/schema.png?raw=true "Schems")](# "Schems")
+
 ## How start PoC
 ```bash
 npm install  
